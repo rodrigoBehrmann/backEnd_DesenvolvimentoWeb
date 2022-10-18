@@ -1,8 +1,10 @@
 clonar o projeto
 
-git checkout starter
+instalar o node no pc
+instalar o dbeaver
+instalar o postgres
 
-git pull origin starter
+configurar o bd no dbeaver
 
 npm install 
 
