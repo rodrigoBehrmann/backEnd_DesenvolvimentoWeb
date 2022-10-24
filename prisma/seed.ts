@@ -6,9 +6,8 @@ async function main(){
     await prisma.usuario.create({
         data: {
             "nome": "Admin",
-            "email": "admin@mail.com",
-            "nivel": "Administrador",
-            "situacao": "Ativo",
+            "matricula": "202233094",
+            "cpf": "0000000000",                   
             "login": "admin",
             "senha": "$2b$10$3JEcQYwkwgtT1sM0pwQn.eLRfDYZQR1YVP3JGZr.d0VCkog6YQ3oe"
         }
