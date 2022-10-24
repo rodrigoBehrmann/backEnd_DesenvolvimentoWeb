@@ -7,8 +7,7 @@ import { AtualizaCursoDto } from '../dto/atualiza-curso';
 export class CursosService {  
   constructor(private readonly prismaService: PrismaService) {}
 
-  async cria(data: CriaCursoDto): Promise<any> {
-    
+  async cria(data: CriaCursoDto): Promise<any> {    
 
     const cursoExists = await this.prismaService.curso.findFirst({
       where: {
