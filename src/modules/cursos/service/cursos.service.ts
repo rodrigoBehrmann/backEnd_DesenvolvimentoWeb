@@ -1,4 +1,8 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { 
+  ConflictException, 
+  Injectable, 
+  NotFoundException
+} from '@nestjs/common';
 import { PrismaService } from 'src/plugins/database/services/prisma.service';
 import { CriaCursoDto } from '../dto/cria-curso';
 import { AtualizaCursoDto } from '../dto/atualiza-curso';
