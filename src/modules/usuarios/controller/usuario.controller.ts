@@ -21,34 +21,34 @@ export class UsuarioController {
   constructor(private readonly usuarioService: UsuarioService) {}
 
   @Post()
-  @Roles(Role.ADMIN)
-  @UseGuards(AuthGuard(), RolesGuard)
+ // @Roles(Role.ADMIN)
+  //@UseGuards(AuthGuard(), RolesGuard)
   async cria(@Body() dados: CriaUsuarioDto): Promise<any> {
     return this.usuarioService.cria(dados);
   }
 
   @Get()
-  @Roles(Role.ADMIN)
-  @UseGuards(AuthGuard(), RolesGuard)
+  //@Roles(Role.ADMIN)
+  //@UseGuards(AuthGuard(), RolesGuard)
   async buscaTodos() {
     return this.usuarioService.buscaTodos();
   }
 
   @Get('/:id')
-  @UseGuards(AuthGuard())
+  //@UseGuards(AuthGuard())
   async buscaPorId(@Param('id') id: string): Promise<any> {
     return this.usuarioService.buscaPorId(id);
   }
 
   @Put('/:id')
-  @UseGuards(AuthGuard())
+ // @UseGuards(AuthGuard())
   async atualiza(@Param('id') id: string, @Body() data: AtualizaUsuarioDto) {
     return this.usuarioService.atualiza(id, data);
   }
 
   @Delete('/:id')
-  @Roles(Role.ADMIN)
-  @UseGuards(AuthGuard(), RolesGuard)
+  //@Roles(Role.ADMIN)
+  //@UseGuards(AuthGuard(), RolesGuard)
   async deleta(@Param('id') id: string) {
     return this.usuarioService.deleta(id);
   }
