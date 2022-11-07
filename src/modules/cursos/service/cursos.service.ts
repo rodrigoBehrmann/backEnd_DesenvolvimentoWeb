@@ -20,7 +20,7 @@ export class CursosService {
     });
 
     if (cursoExists) {
-      throw new ConflictException('Usuário já existe');
+      throw new ConflictException('Curso já existe');
     }
 
     const curso = this.prismaService.curso.create({

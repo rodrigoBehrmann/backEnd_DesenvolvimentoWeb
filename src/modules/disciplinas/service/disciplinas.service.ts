@@ -1,26 +1,84 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { CriaDisciplinaDto } from '../dto/cria-disciplina.dto';
 import { AtualizaDisciplinaDto } from '../dto/atualiza-disciplina.dto';
+import { PrismaService } from 'src/plugins/database/services/prisma.service';
 
 @Injectable()
 export class DisciplinasService {
-  create(createDisciplinaDto: CriaDisciplinaDto) {
-    return 'This action adds a new disciplina';
+  constructor(private readonly prismaService: PrismaService) {}
+
+  async cria(data: CriaDisciplinaDto): Promise<any> {    
+
+    const disciplinaExists = await this.prismaService.disciplina.findFirst({
+      where: {
+        nome: data.nome,
+      },
+    });
+
+    if (disciplinaExists) {
+      throw new ConflictException('Disciplina já existe');
+    }
+
+    const disciplina = this.prismaService.disciplina.create({
+      data,
+    });
+
+    return disciplina;
   }
 
-  findAll() {
-    return `This action returns all disciplinas`;
+  async buscaTodos() {
+    return this.prismaService.disciplina.findMany();
+  }  
+
+  async buscaPorId(id: string) {
+    const disciplina = await this.prismaService.disciplina.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!disciplina) {
+      throw new NotFoundException('Disciplina não encontrada!');
+    }
+
+    return disciplina;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} disciplina`;
+  async atualiza(id: string, data: AtualizaDisciplinaDto) {
+    const disciplinaExists = await this.prismaService.disciplina.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!disciplinaExists) {
+      throw new NotFoundException('Disciplina não existe');
+    }   
+
+    await this.prismaService.disciplina.update({
+      data,
+      where: {
+        id,
+      },
+    });
   }
 
-  update(id: number, updateDisciplinaDto: AtualizaDisciplinaDto) {
-    return `This action updates a #${id} disciplina`;
+  async deleta(id: string) {
+    const disciplinaExists = await this.prismaService.disciplina.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!disciplinaExists) {
+      throw new NotFoundException('Disciplina não existe!');
+    }
+
+    await this.prismaService.disciplina.delete({
+      where: {
+        id,
+      },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} disciplina`;
-  }
 }

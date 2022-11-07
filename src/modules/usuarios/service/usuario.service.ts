@@ -12,8 +12,7 @@ import { PrismaService } from '../../../plugins/database/services/prisma.service
 export class UsuarioService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async cria(data: CriaUsuarioDto): Promise<any> {
-    data.senha = await this.hashSenha(data.senha);
+  async cria(data: any): Promise<any> {   
 
     const usuarioExists = await this.prismaService.usuario.findFirst({
       where: {

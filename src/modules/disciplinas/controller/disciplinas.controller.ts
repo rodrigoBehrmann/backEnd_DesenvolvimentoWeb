@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body,Put, Param, Delete } from '@nestjs/common';
 import { DisciplinasService } from '../service/disciplinas.service';
 import { CriaDisciplinaDto } from '../dto/cria-disciplina.dto';
 import { AtualizaDisciplinaDto } from '../dto/atualiza-disciplina.dto';
@@ -8,27 +8,27 @@ export class DisciplinasController {
   constructor(private readonly disciplinasService: DisciplinasService) {}
 
   @Post()
-  create(@Body() createDisciplinaDto: CriaDisciplinaDto) {
-    return this.disciplinasService.create(createDisciplinaDto);
+  async cria(@Body() dados: CriaDisciplinaDto): Promise<any> {
+    return this.disciplinasService.cria(dados);
   }
 
   @Get()
-  findAll() {
-    return this.disciplinasService.findAll();
+  async buscaTodos() {
+    return this.disciplinasService.buscaTodos();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.disciplinasService.findOne(+id);
+  @Get('/:id') 
+  async buscaPorId(@Param('id') id: string): Promise<any> {
+    return this.disciplinasService.buscaPorId(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDisciplinaDto: AtualizaDisciplinaDto) {
-    return this.disciplinasService.update(+id, updateDisciplinaDto);
+  @Put('/:id')
+  async atualiza(@Param('id') id: string, @Body() data: AtualizaDisciplinaDto) {
+    return this.disciplinasService.atualiza(id, data);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.disciplinasService.remove(+id);
+  @Delete('/:id')
+  async deleta(@Param('id') id: string) {
+    return this.disciplinasService.deleta(id);
   }
 }

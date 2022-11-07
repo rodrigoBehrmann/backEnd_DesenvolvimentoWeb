@@ -8,8 +8,9 @@ async function main(){
             "nome": "Admin",
             "matricula": "202233094",
             "cpf": "0000000000",                   
+            "alunoId": "001",                   
             "login": "admin",
-            "senha": "$2b$10$3JEcQYwkwgtT1sM0pwQn.eLRfDYZQR1YVP3JGZr.d0VCkog6YQ3oe"
+            "senha": "admin"
         }
     })
 
@@ -17,6 +18,14 @@ async function main(){
         data: {
             "nome": "Admin",
             "codigo": "001"
+        }
+    })
+
+    await prisma.disciplina.create({
+        data: {
+            "nome": "Admin",
+            "carga_horaria": "60",
+            "disciplinaId": "001"
         }
     })
 }
