@@ -45,10 +45,3 @@ model Disciplina {
   @@map("disciplinas")//Nome da tabela
 }
 
-model Resultado {
-  id  String @id @default(uuid())
-  nota String
-  resultado String
-
-  @@map("resultados")//Nome da tabela
-}
