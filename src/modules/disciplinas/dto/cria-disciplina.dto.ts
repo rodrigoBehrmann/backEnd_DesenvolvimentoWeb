@@ -1,5 +1,5 @@
-import { Curso } from "@prisma/client";
-import { IsNotEmpty, IsString } from "class-validator";
+import { Curso} from "@prisma/client";
+import { IsNotEmpty, IsOptional, IsString, IsUUID } from "class-validator";
 
 export class CriaDisciplinaDto {
 
@@ -15,9 +15,7 @@ export class CriaDisciplinaDto {
       @IsString()
       carga_horaria: string;  
 
-      @IsNotEmpty({
-        message: 'Informe o Curso',
-      })
-      @IsString()
-      disciplina_id: Curso;  
+      @IsOptional()
+      @IsUUID()      
+      disciplinaId: Curso;  
 }

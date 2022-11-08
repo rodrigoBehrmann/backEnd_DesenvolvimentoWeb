@@ -1,5 +1,5 @@
 import { Curso } from '@prisma/client';
-import { IsNotEmpty, IsString, IsEmail, IsOptional, isString } from 'class-validator';
+import { IsNotEmpty, IsString, IsEmail, IsOptional, isString, IsUUID } from 'class-validator';
 
 export class CriaUsuarioDto {
   @IsNotEmpty({
@@ -11,7 +11,7 @@ export class CriaUsuarioDto {
   @IsNotEmpty({
     message: 'Informe o Email',
   })
-  @IsEmail()
+  @IsString()
   matricula: string;
 
   @IsNotEmpty({
@@ -21,7 +21,7 @@ export class CriaUsuarioDto {
   cpf: string; 
   
   @IsOptional()
-  @IsString()
+  @IsUUID()
   alunoId: Curso;
 
   @IsNotEmpty({

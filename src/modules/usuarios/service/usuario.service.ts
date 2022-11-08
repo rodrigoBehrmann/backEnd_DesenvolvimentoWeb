@@ -16,7 +16,7 @@ export class UsuarioService {
 
     const usuarioExists = await this.prismaService.usuario.findFirst({
       where: {
-        login: data.login,
+        nome: data.nome,
       },
     });
 

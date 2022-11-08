@@ -7,7 +7,7 @@ import { PrismaService } from 'src/plugins/database/services/prisma.service';
 export class DisciplinasService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async cria(data: CriaDisciplinaDto): Promise<any> {    
+  async cria(data: any): Promise<any> {    
 
     const disciplinaExists = await this.prismaService.disciplina.findFirst({
       where: {
@@ -44,7 +44,7 @@ export class DisciplinasService {
     return disciplina;
   }
 
-  async atualiza(id: string, data: AtualizaDisciplinaDto) {
+  async atualiza(id: string, data: any) {
     const disciplinaExists = await this.prismaService.disciplina.findUnique({
       where: {
         id,
