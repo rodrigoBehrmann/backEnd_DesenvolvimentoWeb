@@ -1,18 +1,17 @@
-import { 
-  ConflictException, 
-  Injectable, 
-  NotFoundException
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from 'src/plugins/database/services/prisma.service';
 import { CriaCursoDto } from '../dto/cria-curso';
 import { AtualizaCursoDto } from '../dto/atualiza-curso';
 
 @Injectable()
-export class CursosService {  
+export class CursosService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async cria(data: CriaCursoDto): Promise<any> {    
-
+  async cria(data: CriaCursoDto): Promise<any> {
     const cursoExists = await this.prismaService.curso.findFirst({
       where: {
         nome: data.nome,
@@ -32,7 +31,7 @@ export class CursosService {
 
   async buscaTodos() {
     return this.prismaService.curso.findMany();
-  }  
+  }
 
   async buscaPorId(id: string) {
     const curso = await this.prismaService.curso.findUnique({
@@ -57,7 +56,7 @@ export class CursosService {
 
     if (!cursoExists) {
       throw new NotFoundException('Curso não existe');
-    }   
+    }
 
     await this.prismaService.curso.update({
       data,
@@ -84,6 +83,4 @@ export class CursosService {
       },
     });
   }
-
-
 }
